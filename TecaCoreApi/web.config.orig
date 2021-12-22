@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <location path="." inheritInChildApplications="false">
+    <system.webServer>
+      <handlers>
+        <add name="aspNetCore" path="*" verb="*" modules="AspNetCoreModule" resourceType="Unspecified" />
+        <remove name="aspNetCore" />
+        <remove name="WebDAV" />
+        <!-- I removed the following handlers too, but these
+<<<<<<< HEAD
+                 can probably be ignored for most installations -->
+=======
+                 can probably be ignored for most installations <environmentVariable name="ASPNETCORE_HTTPS_PORT" value="44375" />-->
+>>>>>>> origin/main
+        <remove name="ExtensionlessUrlHandler-Integrated-4.0" />
+        <remove name="OPTIONSVerbHandler" />
+        <remove name="TRACEVerbHandler" />
+        <add name="aspNetCore" path="*" verb="*" modules="AspNetCoreModule" resourceType="Unspecified" />
+      </handlers>
+      <modules>
+        <remove name="WebDAVModule" />
+      </modules>
+<<<<<<< HEAD
+      <aspNetCore processPath="bin\IISSupport\VSIISExeLauncher.exe" arguments="-argFile IISExeLauncherArgs.txt" stdoutLogEnabled="false" stdoutLogFile=".\logs\stdout" forwardWindowsAuthToken="false">
+=======
+      <aspNetCore processPath="bin\IISSupport\VSIISExeLauncher.exe" arguments="-argFile IISExeLauncherArgs.txt" stdoutLogEnabled="false">
+>>>>>>> origin/main
+        <environmentVariables>
+          <environmentVariable name="COMPLUS_ForceENC" value="1" />
+          <environmentVariable name="ASPNETCORE_ENVIRONMENT" value="Development" />
+<<<<<<< HEAD
+          <!--<environmentVariable name="ASPNETCORE_ENVIRONMENT" value="Development" "production"  /> -->
+=======
+          
+          <environmentVariable name="COMPLUS_ForceENC" value="1" />
+          <environmentVariable name="ASPNETCORE_HOSTINGSTARTUPASSEMBLIES" value="Microsoft.AspNetCore.Watch.BrowserRefresh" />
+          <environmentVariable name="DOTNET_STARTUP_HOOKS" value="C:\Program Files\dotnet\SDK\5.0.401\DotnetTools\dotnet-watch\5.0.401-servicing.21424.40\tools\net5.0\any\middleware\Microsoft.AspNetCore.Watch.BrowserRefresh.dll" />
+          <environmentVariable name="ASPNETCORE_AUTO_RELOAD_WS_ENDPOINT" value="ws://localhost:57108/TecaCoreApi/" />
+>>>>>>> origin/main
+        </environmentVariables>
+      </aspNetCore>
+    </system.webServer>
+  </location>
+</configuration>

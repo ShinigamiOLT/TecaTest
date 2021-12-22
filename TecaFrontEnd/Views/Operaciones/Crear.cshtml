@@ -1,0 +1,67 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model OperacionPorCuentaVm
+@{
+}
+
+    <h4 class="modal-title">Nueva Cuenta</h4>
+
+    @if(!(bool)ViewBag.Success)
+{
+  <div class="alert alert-warning" role="alert">
+ @ViewBag.Msg
+</div>  
+}
+
+@using (Html.BeginForm("Crear","Operaciones",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(f=>f.Id)    
+    @Html.HiddenFor(f=>f.CuentaId)
+  
+    <div class="modal-body">
+
+        <div class="form-horizontal">           
+        
+            <div class="form-group">
+                @Html.LabelForModel("Operación", new { @class = "control-label col-sm-3" })
+                <div class="col-sm-9">
+                      @Html.DropDownListFor(model => model.TipoOperacion,ViewBag.Tipos as SelectList,  new { @class = "form-control"} )  
+                    <div>
+                        @Html.ValidationMessageFor(m => m.TipoOperacion)
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                
+               
+                    @Html.LabelFor(m => Model.MontoTransaccion, new { @class = "control-label col-sm-3" })
+               
+              
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(m => m.MontoTransaccion, new {@class = "form-control required"})
+                    <div>
+                        @Html.ValidationMessageFor(m => m.MontoTransaccion)
+                    </div>
+                </div>
+            </div>
+            
+           
+        </div>
+    </div>
+
+     <div >
+        <span id="progress" class="text-center" style="display: none;">
+            <img src="@Url.Content("~/images/wait.gif")" alt="wait" />
+            Wait..
+        </span>   
+        <input class="btn btn-success float-right" type="submit"  value="Guardar" />
+   
+    </div> 
+
+}
+  @Html.ActionLink("Regresar", "Index", "Operaciones",new{CuentaId=@ViewBag.CuentaId},new { @class="btn btn-sm btn-info", role="button"})          
+           
+     

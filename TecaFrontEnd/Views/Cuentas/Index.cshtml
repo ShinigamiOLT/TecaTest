@@ -1,0 +1,58 @@
+﻿@using ModelosDto
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<CuentaAhorroVm>
+
+@{
+}
+<div class="card" >
+
+  <div class="card-body">
+    <h5 class="card-title">Lista de Cuentas</h5>
+ <br />
+
+<strong>Numero Cliente:</strong>@ViewBag.NumeroCliente<br />
+<strong>Cliente:</strong>@ViewBag.DatoCliente<br />
+
+     <a type="button" class="btn btn-sm btn-primary float-right" href="@Url.Action("Crear",new {ClienteId=@ViewBag.ClienteId})">Nueva Cuenta</a>
+
+<table class="table">
+ 
+  <thead>
+    <tr>
+      <th scope="col">Numero Cuenta</th>
+      <th scope="col">Saldo Actual </th>
+      <th scope="col">Fecha Apertura</th>  
+      <th scope="col">Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+       @foreach(var row in Model)
+        {
+               <tr>
+      <th scope="row">@row.NumeroCuenta</th>
+      <td>@row.SaldoActual</td>
+
+      <td> @row.FechaCreacion</td> 
+      <td>  
+          
+       @Html.ActionLink("Operación", "Index", "Operaciones",new {CuentaId=@row.Id},new { @class="btn btn-sm btn-success", role="button"}) |          
+      @Html.ActionLink("Editar", "Editar", "Cuentas",new {ClienteId=row.ClienteId,Id = @row.Id},new { @class="btn btn-sm btn-info", role="button"}) |  
+      @Html.ActionLink(
+    "Borrar", 
+    "Borrar", 
+    new {ClienteId=row.ClienteId,Id = @row.Id }, 
+    new { onclick = "return confirm('Estas seguro de eliminar la Cuenta "+@row.NumeroCuenta +" ?');" ,@class="btn btn-sm btn-danger", role="button"}) 
+</td>
+  </tr>
+        }
+     
+  
+  </tbody>
+</table>
+ @Html.ActionLink("Regresar", "Index", "Clientes",null,new { @class="btn btn-sm btn-info", role="button"})          
+ 
+  </div>
+</div>
+

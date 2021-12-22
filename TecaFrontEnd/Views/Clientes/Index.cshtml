@@ -1,0 +1,52 @@
+﻿@using ModelosDto
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<ClienteDto>
+
+@{
+}
+<div class="card" >
+
+  <div class="card-body">
+    <h5 class="card-title">Lista de Clientes</h5>
+ <br />
+      <a type="button" class="btn btn-sm btn-primary float-right" href="@Url.Action("Crear")">Nuevo Cliente</a>
+
+<table class="table">
+ 
+  <thead>
+    <tr>
+      <th scope="col">Numero de Identificación</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellidos</th>
+      <th scope="col">Fecha Apertura</th>  
+      <th scope="col">Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+       @foreach(var row in Model)
+        {
+               <tr>
+      <th scope="row">@row.NumeroIdentificacion</th>
+      <td>@row.Nombre</td>
+      <td>@row.Apellidos </td>
+      <td> @row.FechaCreacion</td> 
+      <td>  
+          @Html.ActionLink("Cuentas", "Index", "Cuentas",new {ClienteId=@row.Id},new { @class="btn btn-success btn-sm", role="button"}) |   
+      @Html.ActionLink("Editar", "Editar", "Clientes",new {@row.Id},new { @class="btn btn-info  btn-sm", role="button"}) |  @Html.ActionLink(
+    "Borrar", 
+    "Borrar", 
+    new { id = row.Id }, 
+    new { onclick = "return confirm('Estas seguro de eliminar al cliente "+@row.Apellidos +" ?');" ,@class="btn btn-danger btn-sm", role="button"}) 
+</td>
+  </tr>
+        }
+     
+  
+  </tbody>
+</table>
+
+  </div>
+</div>
+

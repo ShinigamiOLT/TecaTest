@@ -1,0 +1,52 @@
+﻿@using ModelosDto
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<OperacionPorCuentaVm>
+
+@{
+}
+<div class="card" >
+
+  <div class="card-body">
+    <h5 class="card-title">Resumen Operaciones</h5>
+
+<br />
+<strong>Numero Cuenta:</strong>@ViewBag.NumeroCuenta @ViewBag.CuentaId<br />
+<strong>Saldo Actual: </strong><label class="text-primary float-center "> @ViewBag.SaldoCuenta</label> 
+
+     <a type="button" class="btn btn-sm btn-primary float-right" href="@Url.Action("Crear",new {CuentaId=@ViewBag.CuentaId})">Nueva Operación</a>
+
+<table class="table">
+ 
+  <thead>
+    <tr>
+      <th scope="col">Numero Operación</th> 
+      <th scope="col">Fecha Movimiento</th>  
+      <th scope="col">Tipo Operación</th>
+      <th scope="col">Monto Transacción </th>
+     <th scope="col">Saldo Final</th>
+     
+    </tr>
+  </thead>
+  <tbody>
+       @foreach(var row in Model)
+        {
+               <tr>
+      <th scope="row">@row.Id</th>       
+      <td> @row.FechaOperacion</td> 
+      <td> @row._TipoOperacion</td>
+      <td> @row.MontoTransaccion</td>       
+      <td> @row.SaldoFinal</td> 
+ 
+  </tr>
+        }
+     
+  
+  </tbody>
+</table>
+ @Html.ActionLink("Regresar", "Index", "Cuentas",new{ClienteId=ViewBag.ClienteId},new { @class="btn btn-sm btn-info", role="button"})          
+ 
+</div>
+
+</div>
