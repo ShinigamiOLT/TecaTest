@@ -16,6 +16,7 @@ namespace TecaFrontEnd.Models
   
         [Range(0.0, Double.MaxValue, ErrorMessage = "El campo {0} debe ser mayor que {1}.")]
         public decimal MontoTransaccion { get; set; }
+        public string MontoTransaccion_=> $"{MontoTransaccion:C}";
         public decimal SaldoFinal { get; set; }
         public int CuentaId { get; set; }
 

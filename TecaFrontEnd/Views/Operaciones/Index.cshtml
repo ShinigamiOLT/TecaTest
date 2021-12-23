@@ -12,8 +12,8 @@
     <h5 class="card-title">Resumen Operaciones</h5>
 
 <br />
-<strong>Numero Cuenta:</strong>@ViewBag.NumeroCuenta @ViewBag.CuentaId<br />
-<strong>Saldo Actual: </strong><label class="text-primary float-center "> @ViewBag.SaldoCuenta</label> 
+<strong>Numero Cuenta:</strong><h4>@ViewBag.NumeroCuenta</h4><br />
+<strong>Saldo Actual: </strong><h3 class="text-primary float-center "> @ViewBag.SaldoCuenta</h3> 
 
      <a type="button" class="btn btn-sm btn-primary float-right" href="@Url.Action("Crear",new {CuentaId=@ViewBag.CuentaId})">Nueva Operación</a>
 
@@ -36,7 +36,7 @@
       <th scope="row">@row.Id</th>       
       <td> @row.FechaOperacion</td> 
       <td> @row._TipoOperacion</td>
-      <td> @row.MontoTransaccion</td>       
+      <td class="@if(row._TipoOperacion ==@"Deposito"){@Html.Raw("text-success") }else{@Html.Raw("text-danger")}"> @row.MontoTransaccion_</td>       
       <td> @row.SaldoFinal</td> 
  
   </tr>

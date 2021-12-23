@@ -163,7 +163,7 @@ namespace TecaCoreApi
             });
             ConfigurandoInyeccionDependencia(services);
 
-            //  services.AddTransient<IHostedService, VerificaComisionesActivas>();
+        
             services.AddAutoMapper(typeof(Startup));
         }
 
@@ -215,11 +215,11 @@ namespace TecaCoreApi
         private static void ConfigurandoInyeccionDependencia(IServiceCollection services)
         {
             // services.AddTransient<,>();
-
             services.AddTransient<ITokenServicio, TokenServicio>();
             services.AddTransient<IMasterServicio, CMasterServicio>();
             services.AddTransient<IClientesServicio, CClientesServicio>();
-            services.AddTransient<ICuentaAhorroServicio, CCuentaAhorroServicio>(); services.AddTransient<IOperacionCuentaServicio, COperacionCuentaServicio>();
+            services.AddTransient<ICuentaAhorroServicio, CCuentaAhorroServicio>(); 
+            services.AddTransient<IOperacionCuentaServicio, COperacionCuentaServicio>();
 
         }
     }

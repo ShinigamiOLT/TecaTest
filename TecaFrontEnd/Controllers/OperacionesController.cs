@@ -34,15 +34,16 @@ namespace TecaFrontEnd.Controllers
             ViewBag.NumeroCuenta = $"{Cuenta.NumeroCuenta}";
             ViewBag.ClienteId = Cuenta.ClienteId;
             List<OperacionPorCuentaVm> cuentasvm = new List<OperacionPorCuentaVm>();
-            foreach (var vm in Operaciones)
+            foreach (var OperacionDto in Operaciones)
             {
                 cuentasvm.Add(new OperacionPorCuentaVm()
                 {
-                    Id = vm.Id,
-                    FechaOperacion = vm.FechaOperacion,
-                    _TipoOperacion = vm._TipoOperacion,
-                    MontoTransaccion = vm.MontoTransaccion,
-                    SaldoFinal= vm.SaldoFinal
+                    Id = OperacionDto.Id,
+                    FechaOperacion = OperacionDto.FechaOperacion,
+                    _TipoOperacion = OperacionDto._TipoOperacion,
+                
+                    MontoTransaccion = OperacionDto.MontoTransaccion,
+                    SaldoFinal= OperacionDto.SaldoFinal
                 });
             };
 

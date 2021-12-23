@@ -14,6 +14,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Config\**" />
+    <Content Remove="Config\**" />
+    <EmbeddedResource Remove="Config\**" />
+    <None Remove="Config\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.10" />
@@ -34,7 +41,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Config\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
