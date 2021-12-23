@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Modelos.BaseApp;
 using ModelosDto;
 using Persistencia.DataBase;
@@ -15,12 +16,15 @@ namespace Servicios
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
         private readonly ICuentaAhorroServicio _cuentaAhorroServicio;
+        private readonly ILogger<COperacionCuentaServicio> _Logger;
 
-        public COperacionCuentaServicio(ApplicationDbContext contexto,ICuentaAhorroServicio cuentaAhorroServicio, IMapper mapper)
+        public COperacionCuentaServicio(ApplicationDbContext contexto,ICuentaAhorroServicio cuentaAhorroServicio, IMapper mapper,
+            ILogger<COperacionCuentaServicio> Logger)
         {
             _context = contexto;
             _mapper = mapper;
             _cuentaAhorroServicio = cuentaAhorroServicio;
+            _Logger = Logger;
         }
         /******************* Reglas de negocio************/
         async Task<RegistroOperacion> AplicaOperacionDeposito(int CuentaId, decimal MontoTransaccion, Enums.TipoOperacion tipoOperacion)
@@ -43,6 +47,8 @@ namespace Servicios
 
                     respuesta.Success = true;
                     respuesta.Message = "Deposito Aplicado";
+                    _Logger.LogInformation($"Deposito realizado: Cuenta {cuenta.Id} Monto {MontoTransaccion}");
+                   
                 }
                 else
                 {
@@ -59,6 +65,7 @@ namespace Servicios
 
                         respuesta.Success = true;
                         respuesta.Message = "Retiro Aplicado";
+                        _Logger.LogInformation($"Retiro realizado: Cuenta {cuenta.Id} Monto {MontoTransaccion}");
                     }
                     else
                     {

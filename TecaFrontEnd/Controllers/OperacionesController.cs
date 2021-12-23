@@ -60,24 +60,30 @@ namespace TecaFrontEnd.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Crear(OperacionPorCuentaVm operacionVm)
-        {
+        public async Task<IActionResult> Crear(OperacionPorCuentaCreateVm OperacionVm)
+        {   ViewBag.Tipos = ToSelectList(new List<Enums.TipoOperacion>() { Enums.TipoOperacion.Deposito, Enums.TipoOperacion.Retiro }, "Id", "Text");
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Success =true;
+                return View(OperacionVm);
+            }
+
             var model = new OperacionPorCuentaCreateDto()
             {
-                TipoOperacion =(Enums.TipoOperacion) operacionVm.TipoOperacion ,
-                MontoTransaccion = operacionVm.MontoTransaccion
+                TipoOperacion =(Enums.TipoOperacion)OperacionVm.TipoOperacion ,
+                MontoTransaccion = OperacionVm.MontoTransaccion
             };
 
-          var respuesta=  await _clientesOperacion.Create(operacionVm.CuentaId, model);
+          var respuesta=  await _clientesOperacion.Create(OperacionVm.CuentaId, model);
             ViewBag.Success = respuesta.Success;
             ViewBag.Msg = respuesta.Msg;
 
-            ViewBag.Tipos = ToSelectList(new List<Enums.TipoOperacion>() { Enums.TipoOperacion.Deposito, Enums.TipoOperacion.Retiro }, "Id", "Text");
-            if (!respuesta.Success)
+              if (!respuesta.Success)
             {
-                return View(operacionVm);
+                return View(OperacionVm);
             }
-            return RedirectToAction("Index", new { operacionVm.CuentaId });
+            return RedirectToAction("Index", new { OperacionVm.CuentaId });
 
         }
         [NonAction]

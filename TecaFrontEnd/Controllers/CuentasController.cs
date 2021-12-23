@@ -55,8 +55,13 @@ namespace TecaFrontEnd.Controllers
             return View();
         }
     [HttpPost]
-        public async Task<IActionResult> Crear(CuentaAhorroVm CuentaVm)
+        public async Task<IActionResult> Crear(CuentaAhorroCreateVm CuentaVm)
         {
+            if (!ModelState.IsValid)
+            {
+             
+                return View(CuentaVm);
+            }
             var model = new CuentaAhorroCreateDto()
             {
                 NumeroCuenta = CuentaVm.NumeroCuenta,
@@ -87,24 +92,29 @@ namespace TecaFrontEnd.Controllers
             return View(cuentavm);
         }
         [HttpPost]
-        public async Task<IActionResult> Editar(CuentaAhorroVm cuentaVm)
+        public async Task<IActionResult> Editar(CuentaAhorroVm CuentaVm)
         {
+            if (!ModelState.IsValid)
+            {
+
+                return View(CuentaVm);
+            }
             var model = new CuentaAhorroCreateDto() { 
-                NumeroCuenta= cuentaVm.NumeroCuenta,
-                SaldoActual= cuentaVm.SaldoActual
+                NumeroCuenta= CuentaVm.NumeroCuenta,
+                SaldoActual= CuentaVm.SaldoActual
             };
 
-            await _cuentasServicio.Update(cuentaVm.Id, cuentaVm.ClienteId, model);
-            return RedirectToAction("Index", new { cuentaVm.ClienteId });
+            await _cuentasServicio.Update(CuentaVm.Id, CuentaVm.ClienteId, model);
+            return RedirectToAction("Index", new { CuentaVm.ClienteId });
 
         }
        
-        public async Task<IActionResult> Borrar(CuentaAhorroVm clienteDto)
+        public async Task<IActionResult> Borrar(CuentaAhorroVm ClienteDto)
         {
           
 
-            await _cuentasServicio.Remove(clienteDto.ClienteId, clienteDto.Id);
-            return RedirectToAction("Index", new { clienteDto.ClienteId });
+            await _cuentasServicio.Remove(ClienteDto.ClienteId, ClienteDto.Id);
+            return RedirectToAction("Index", new { ClienteDto.ClienteId });
 
         }
        

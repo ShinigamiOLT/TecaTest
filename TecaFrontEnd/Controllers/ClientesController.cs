@@ -29,8 +29,13 @@ namespace TecaFrontEnd.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Crear(ClienteVM ClienteVm)
+        public async Task<IActionResult> Crear(ClienteVm ClienteVm)
         {
+            if(!ModelState.IsValid)
+            {
+               return View(ClienteVm);
+            }
+
             var model = new ClienteCreateDto()
             {
                 NumeroIdentificacion = ClienteVm.NumeroIdentificacion,
@@ -52,31 +57,43 @@ namespace TecaFrontEnd.Controllers
             {
                 return RedirectToAction("Index");
             }
-            return View(cliente);
+            var clientevm = new ClienteVm()
+            {
+               NumeroIdentificacion = cliente.NumeroIdentificacion,
+               Nombre = cliente.Nombre,
+               ApellidoPaterno= cliente.ApellidoPaterno,
+               ApellidoMaterno= cliente.ApellidoMaterno
+            };
+            return View(clientevm);
         }
         [HttpPost]
-        public async Task<IActionResult> Editar(ClienteDto clienteDto)
+        public async Task<IActionResult> Editar(ClienteVm ClienteVm)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(ClienteVm);
+            }
+
             var model = new ClienteCreateDto()
             {
-                NumeroIdentificacion = clienteDto.NumeroIdentificacion,
-                Nombre = clienteDto.Nombre,
-                ApellidoPaterno = clienteDto.ApellidoPaterno,
-                ApellidoMaterno = clienteDto.ApellidoMaterno
+                NumeroIdentificacion = ClienteVm.NumeroIdentificacion,
+                Nombre = ClienteVm.Nombre,
+                ApellidoPaterno = ClienteVm.ApellidoPaterno,
+                ApellidoMaterno = ClienteVm.ApellidoMaterno
             };
 
-            await _clientesServicio.Update(clienteDto.Id, model);
+            await _clientesServicio.Update(ClienteVm.Id, model);
             return RedirectToAction("Index");
 
         }
 
      
 
-        public async Task<IActionResult> Borrar(ClienteVM clienteDto)
+        public async Task<IActionResult> Borrar(ClienteVm ClienteVm)
         {
 
 
-            await _clientesServicio.Remove(clienteDto.Id);
+            await _clientesServicio.Remove(ClienteVm.Id);
             return RedirectToAction("Index");
 
         }

@@ -1,7 +1,7 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@model OperacionPorCuentaVm
+@model OperacionPorCuentaCreateVm
 @{
 }
 
@@ -9,17 +9,21 @@
 
     @if(!(bool)ViewBag.Success)
 {
-  <div class="alert alert-warning" role="alert">
- @ViewBag.Msg
-</div>  
+ 
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Alerta!</strong>  @ViewBag.Msg
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 }
 
 @using (Html.BeginForm("Crear","Operaciones",FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(f=>f.Id)    
+   
     @Html.HiddenFor(f=>f.CuentaId)
-  
+    <div asp-validation-summary="All" class="text-danger"></div>
     <div class="modal-body">
 
         <div class="form-horizontal">           

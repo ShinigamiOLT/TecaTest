@@ -14,7 +14,7 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(f=>f.Id)    
     @Html.HiddenFor(f=>f.ClienteId)
-  
+    <div asp-validation-summary="All" class="text-danger"></div>
     <div class="modal-body">
 
         <div class="form-horizontal">           
